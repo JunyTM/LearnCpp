@@ -148,7 +148,7 @@ int isEmptyQueue(Queue *q)
 
 int main()
 {
-    Queue *q = malloc(sizeof(ListNode));
+    Queue *q = malloc(sizeof(Queue));
     q->ll.size = 0;
     q->ll.head = NULL;
 

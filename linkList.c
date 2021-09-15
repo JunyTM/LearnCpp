@@ -7,6 +7,7 @@ typedef struct _listnode
     struct _listnode *next;
 } ListNode;
 
+
 void printList(ListNode *head)
 {
     ListNode *cache = head;
