@@ -3,7 +3,7 @@
 
 typedef struct _listnode
 {
-    int num;
+    char num;
     struct _listnode *next;
 } ListNode;
 
@@ -23,7 +23,7 @@ void printList(ListNode *head)
     ListNode *cache = head;
     while (cache != NULL)
     {
-        printf("%d\t", cache->num);
+        printf("%c\t", cache->num);
         cache = cache->next;
     }
 }
@@ -139,12 +139,12 @@ int main()
     s->ll.size = 0;
     s->ll.head = NULL;
 
-    int item;
+    char item;
     do
     {
-        scanf("%d", &item);
+        scanf("%c", &item);
         push(s, item);
-    } while ((s->ll).head->num != 0);
+    } while ((s->ll).head->num != '0');
     pop(s);
     printList(s->ll.head);
     free(s);
