@@ -2,35 +2,57 @@
 
 using namespace std;
 
-void sort(int *a, int num)
+void change(int *a, int n)
 {
-    for (int i = 1; i < num; i++)
+    int cache = a[0];
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < num; j++)
-        {
-            if (a[i] < a[j])
-            {
-                a[i] += a[j];
-                a[j] = a[i] - a[j];
-                a[i] -= a[j];
-            }
-        }
+        a[i] = a[i + 1];
     }
+    a[n - 1] = cache;
 }
 
-int minSum(int *a, int num)
+int m_Sum(int *a, int n)
 {
-    int sum = a[0] + a[1] + a[2];
-    for (int i = 3; i < num; i++)
+    int lenght = n;
+    int minSum = INT_MAX;
+    while (lenght > 0)
     {
-        if (a[i] < 0)
-            sum += a[i];
+        for (int i = 0; i < n - 2; i++)
+        {
+            for (int j = i + 2; j < n; j++)
+            {
+                int sum = 0;
+                for (int k = i; k <= j; k++)
+                {
+                    sum += a[k];
+                }
+                minSum = min(minSum, sum);
+            }
+        }
+        change(a, n);
+        lenght--;
     }
-    return sum;
+    return minSum;
 }
 
 int main()
 {
-    sort(a, num);
-    cout << minSum(a, num);
+    int num = 100;
+    int a[num] = {-273,-261,-916,-388,143,-878,-794,-134,596,-447,
+-722,-485,-33,439,-286,-84,-924,0,-903,-676,
+609,-645,-870,-862,-258,888,640,-570,587,-421,
+625,-134,-31,714,-161,-194,-834,-122,-919,-541,
+-217,-757,-781,281,956,-779,-354,-872,-928,-561,
+-36,-293,-483,130,-189,356,-262,-916,-760,-323,
+-88,-146,-481,-410,260,-497,-95,-896,-833,-66,
+-381,-829,-234,-202,-701,807,-768,-19,497,252,
+-553,-751,-857,-640,-904,-538,-992,-777,-592,-786,
+-157,-190,-607,-60,-707,-380,247,659,-14,-560};
+    // cin>>num;
+    // for (int i = 0; i < num; i++)
+    // {
+    //     cin>>a[i];
+    // }
+    cout << m_Sum(a, num);
 }
