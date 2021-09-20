@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 typedef struct _listnode
 {
@@ -133,19 +134,75 @@ int peek(Stack *s)
     }
 }
 
-int main()
+void infixToPostfix(char *exp, char *postfix)
 {
-    Stack *s = malloc(sizeof(Stack));
-    s->ll.size = 0;
-    s->ll.head = NULL;
+    Stack *store = malloc(sizeof(Stack));
+    store->ll.size = 0;
+    store->ll.head = NULL;
 
-    char item;
-    do
+    for (int i = 0; i < strlen(exp) + 1; i++)
     {
-        scanf("%c", &item);
-        push(s, item);
-    } while ((s->ll).head->num != '0');
-    pop(s);
-    printList(s->ll.head);
-    free(s);
+        if (!isEmptyStack(store))
+        {
+            if ('A' <= exp[i] && exp[i] <= 'z')
+            {
+                postfix[i] = exp[i];
+            }
+            else
+            {
+                if (exp[i] == '(')
+                {
+                    push(store, exp[i]);
+                    break;
+                }
+                else if (exp[i] == '+' || exp[i] == '-')
+                {
+                    if (peek(store) == '-' || peek(store) == '+')
+                    {
+                        postfix[i] = pop(store);
+                        push(store, exp[i]);
+                    }
+                    else
+                    {
+                        push(store, exp[i]);
+                    }
+                }
+                else if (exp[i] == ')')
+                {
+                    while (peek(store) == '(')
+                    {
+                        postfix[i] = pop(store);
+                    }
+                }
+                else if (exp[i] == '^')
+                {
+                    if (peek(store) == '^')
+                    {
+                        postfix[i] = pop(store);
+                        push(store, exp[i]);
+                    }
+                }
+                else
+                {
+                    if (peek(store) != '^')
+                    {
+                        postfix[i] = pop(store);
+                        push(store, exp[i]);
+                    }
+                }
+            }
+        }
+        else
+        {
+            postfix[i] = exp[i];
+        }
+    }
+}
+
+int main(void)
+{
+    char exp[] = "a+b*(c^d-e)^(f+g*h)-i";
+    char *postfix = malloc(sizeof(char) * (strlen(exp) + 1));
+    infixToPostfix(exp, postfix);
+    printf("%s", postfix);
 }
