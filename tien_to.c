@@ -153,7 +153,6 @@ void infixToPostfix(char *exp, char *postfix)
                 if (exp[i] == '(')
                 {
                     push(store, exp[i]);
-                    break;
                 }
                 else if (exp[i] == '+' || exp[i] == '-')
                 {
@@ -184,9 +183,13 @@ void infixToPostfix(char *exp, char *postfix)
                 }
                 else
                 {
-                    if (peek(store) != '^')
+                    if (peek(store) == '^')
                     {
                         postfix[i] = pop(store);
+                        push(store, exp[i]);
+                    }
+                    else
+                    {
                         push(store, exp[i]);
                     }
                 }
