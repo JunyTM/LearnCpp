@@ -159,7 +159,10 @@ int main()
         scanf("%d", &item);
         enqueue(q, item);
     } while ((q->ll).tail->num != 0);
-
+    
+    removeNode(&(q->ll.head), q->ll.size);
     printList(q->ll.head);
+    
+
     free(q);
 }

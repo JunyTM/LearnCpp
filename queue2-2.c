@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 typedef struct _listnode
 {
@@ -10,13 +11,15 @@ typedef struct _listnode
 typedef struct _linkedlist
 {
     ListNode *head;
+    ListNode *tail;
     int size;
 } LinkedList;
 
-typedef struct _stack
+typedef struct _queue
 {
     LinkedList ll;
-} Stack;
+
+} Queue;
 
 void printList(ListNode *head)
 {
@@ -89,63 +92,78 @@ void removeNode(ListNode **ptrHead, int index)
     }
 }
 
-//---------------------------------- stack -------------------------------------
+//-------------------------------------------- type Queue ----------------------------------------------------
 
-void push(Stack *s, int item)
+void enqueue(Queue *q, int item)
 {
-    insertNode(&(s->ll.head), 0, item); //top of stack
-    s->ll.size++;
+    if (q->ll.tail == NULL)
+    {
+        insertNode(&(q->ll.head), 0, item);
+        (q->ll).tail = (q->ll).head;
+    }
+    else
+    {
+        (q->ll).tail->next = malloc(sizeof(ListNode));
+        (q->ll).tail = ((q->ll).tail)->next;
+        (q->ll).tail->num = item;
+        (q->ll).tail->next = NULL;
+        (q->ll).size++;
+    }
 }
 
-int isEmptyStack(Stack *s)
-{
-    if (s->ll.size == 0)
-        return 1;
-    return 0;
-}
-
-int pop(Stack *s)
+int dequeue(Queue *q)
 {
     int item;
-    if (!isEmptyStack(s))
+    if (q->ll.head != NULL)
     {
-        item = (s->ll).head->num;
-        removeNode(&(s->ll).head, 0); //top of stack
-        (s->ll).size--;
+        item = ((q->ll).head)->num;
+        removeNode(&(q->ll).head, 0);
+        (q->ll).size--;
         return item;
     }
     else
     {
-
-        printf("Ngan xep rong");
+        printf("Hang doi rong");
         return 0;
     }
 }
 
-int peek(Stack *s)
+int peek(Queue *q)
 {
-    if (s->ll.head != NULL)
-        return (s->ll).head->num;
+    if (q->ll.head != NULL)
+        return (q->ll).head->num;
     else
     {
-        printf("Ngan xep rong");
+
+        printf("Hang doi rong");
         return 0;
     }
+}
+
+int isEmptyQueue(Queue *q)
+{
+    if ((q->ll).size == 0)
+        return 1;
+    return 0;
 }
 
 int main()
 {
-    Stack *s = malloc(sizeof(Stack));
-    s->ll.size = 0;
-    s->ll.head = NULL;
+    char str[] = "E A S * Y * Q U E * * * S T * * * I O * N * * *";
+    Queue *q = malloc(sizeof(Queue));
+    q->ll.size = 0;
+    q->ll.head = NULL;
+    q->ll.tail = NULL;
 
-    char item;
-    do
+    for (int i = 0; i < strlen(str); i++)
     {
-        scanf("%c", &item);
-        push(s, item);
-    } while ((s->ll).head->num != '0');
-    pop(s);
-    printList(s->ll.head);
-    free(s);
+        if (str[i] == '*')
+        {
+            dequeue(q);
+        }
+        else
+            enqueue(q, str[i]);
+    }
+    printList(q->ll.head);
+    free(q);
 }

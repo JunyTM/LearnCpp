@@ -1,29 +1,32 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 typedef struct _listnode
 {
-    char num;
+    int num;
     struct _listnode *next;
 } ListNode;
 
 typedef struct _linkedlist
 {
     ListNode *head;
+    ListNode *tail;
     int size;
 } LinkedList;
 
-typedef struct _stack
+typedef struct _queue
 {
     LinkedList ll;
-} Stack;
+
+} Queue;
 
 void printList(ListNode *head)
 {
     ListNode *cache = head;
     while (cache != NULL)
     {
-        printf("%c\t", cache->num);
+        printf("%d\t", cache->num);
         cache = cache->next;
     }
 }
@@ -89,67 +92,83 @@ void removeNode(ListNode **ptrHead, int index)
     }
 }
 
-//---------------------------------- stack -------------------------------------
+//-------------------------------------------- type Queue ----------------------------------------------------
 
-void push(Stack *s, int item)
+void enqueue(Queue *q, int item)
 {
-    insertNode(&(s->ll.head), 0, item); //top of stack
-    s->ll.size++;
+    if (q->ll.tail == NULL)
+    {
+        insertNode(&(q->ll.head), 0, item);
+        (q->ll).tail = (q->ll).head;
+    }
+    else
+    {
+        (q->ll).tail->next = malloc(sizeof(ListNode));
+        (q->ll).tail = ((q->ll).tail)->next;
+        (q->ll).tail->num = item;
+        (q->ll).tail->next = NULL;
+        (q->ll).size++;
+    }
 }
 
-int isEmptyStack(Stack *s)
-{
-    if (s->ll.size == 0)
-        return 1;
-    return 0;
-}
-
-int pop(Stack *s)
+int dequeue(Queue *q)
 {
     int item;
-    if (!isEmptyStack(s))
+    if(q->ll.head != NULL)
     {
-        item = (s->ll).head->num;
-        removeNode(&(s->ll).head, 0); //top of stack
-        (s->ll).size--;
+        item = ((q->ll).head)->num;
+        removeNode(&(q->ll).head, 0);
+        (q->ll).size--;
         return item;
     }
     else
     {
-
-        printf("Ngan xep rong");
+        printf("Hang doi rong");
         return 0;
     }
 }
 
-int peek(Stack *s)
+int peek(Queue *q)
 {
-    if (s->ll.head != NULL)
-        return (s->ll).head->num;
+    if (q->ll.head != NULL)
+        return (q->ll).head->num;
     else
     {
-        printf("Ngan xep rong");
+
+        printf("Hang doi rong");
         return 0;
     }
 }
 
-int main()
+int isEmptyQueue(Queue *q)
 {
-    Stack *s = malloc(sizeof(Stack));
-    s->ll.size = 0;
-    s->ll.head = NULL;
+    if ((q->ll).size == 0)
+        return 1;
+    return 0;
+}
 
-    char item;
-    do
+int tranform(int num) {
+    int p = 0,binaryNumber = 0;
+    while (num > 0)
     {
-        scanf("%c", &item);
-        push(s, item);
-    } while ((s->ll).head->num != '0');
-    pop(s);
-
-    while(!isEmptyStack(s)){
-        printf("%c",pop(s));
+        binaryNumber += (num % 2) * pow(10, p);
+        ++p;
+        num /= 2;
     }
+    return binaryNumber;
+}
 
-    free(s);
+int main() {
+    int n;
+    scanf("%d", &n);
+
+    Queue *q = malloc(sizeof(Queue));
+    q->ll.size = 0;
+    q->ll.head = NULL;
+    q->ll.tail = NULL;
+    for(int i = 1; i <= n; i++){
+        enqueue(q, tranform(i));
+    }
+    printList(q->ll.head);
+    free(q);
 }

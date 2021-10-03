@@ -134,72 +134,82 @@ int peek(Stack *s)
     }
 }
 
+//gặp toán hạng thì thêm vào biểu thức
+//gặp ( thì thêm vào stack
+//gặp ) thì lấy tất cả trong stack vào biểu thức cho đến khi gặp (
+//gặp toán tử nếu stack ko rỗng và độ ưu tiên toán tử trong stack >= toán tử đang gặp ==> pop đưa vào biểu thức
+//ngược lại thì cứ đẩy vào trong stack
+
+int isOperand(char ch)
+{
+    return ((ch >= 'A') && (ch <= 'z'));
+}
+
+int Prec(char ch)
+{
+    switch (ch)
+    {
+    case '+':
+    case '-':
+        return 1;
+    case '*':
+    case '/':
+        return 2;
+    case '^':
+        return 3;
+    }
+    return -1;
+}
+
 void infixToPostfix(char *exp, char *postfix)
 {
     Stack *store = malloc(sizeof(Stack));
     store->ll.size = 0;
     store->ll.head = NULL;
 
-    for (int i = 0; i < strlen(exp) + 1; i++)
+    int k = -1;
+    for (int i = 0; i < strlen(exp); i++)
     {
-        if (!isEmptyStack(store))
+        if (isOperand(exp[i]))
         {
-            if ('A' <= exp[i] && exp[i] <= 'z')
+            k++;
+            postfix[k] = exp[i];
+        }
+        else if (exp[i] == '(')
+        {
+            push(store, exp[i]);
+        }
+        else if (exp[i] == ')')
+        {
+            while (!isEmptyStack(store) && peek(store) != '(')
             {
-                postfix[i] = exp[i];
+                k++;
+                postfix[k] = pop(store);
+            }
+            if (!isEmptyStack(store) && peek(store) != '(')
+            {
+                printf("bieu thuc khong hop le");
+                return;
             }
             else
-            {
-                if (exp[i] == '(')
-                {
-                    push(store, exp[i]);
-                }
-                else if (exp[i] == '+' || exp[i] == '-')
-                {
-                    if (peek(store) == '-' || peek(store) == '+')
-                    {
-                        postfix[i] = pop(store);
-                        push(store, exp[i]);
-                    }
-                    else
-                    {
-                        push(store, exp[i]);
-                    }
-                }
-                else if (exp[i] == ')')
-                {
-                    while (peek(store) == '(')
-                    {
-                        postfix[i] = pop(store);
-                    }
-                }
-                else if (exp[i] == '^')
-                {
-                    if (peek(store) == '^')
-                    {
-                        postfix[i] = pop(store);
-                        push(store, exp[i]);
-                    }
-                }
-                else
-                {
-                    if (peek(store) == '^')
-                    {
-                        postfix[i] = pop(store);
-                        push(store, exp[i]);
-                    }
-                    else
-                    {
-                        push(store, exp[i]);
-                    }
-                }
-            }
+                pop(store);
         }
         else
         {
-            postfix[i] = exp[i];
+            while (!isEmptyStack(store) && Prec(exp[i]) <= Prec(peek(store)))
+            {
+                k++;
+                postfix[k] = pop(store);
+            }
+            push(store, exp[i]);
         }
     }
+    while (!isEmptyStack(store))
+    {
+        k++;
+        postfix[k] = pop(store);
+    }
+    postfix[k++] = '\0';
 }
 
 int main(void)
