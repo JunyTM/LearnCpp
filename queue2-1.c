@@ -147,28 +147,52 @@ int isEmptyQueue(Queue *q)
     return 0;
 }
 
-int tranform(int num) {
-    int p = 0,binaryNumber = 0;
+// int tranform(int num) {
+//     int p = 0,binaryNumber = 0;
+//     while (num > 0)
+//     {
+//         binaryNumber += (num % 2) * pow(10, p);
+//         ++p;
+//         num /= 2;
+//     }
+//     return binaryNumber;
+// }
+
+void tranform(int num) {
+    Queue *q = malloc(sizeof(Queue));
+    q->ll.size = 0;
+    q->ll.head = NULL;
+    q->ll.tail = NULL;
+
     while (num > 0)
     {
-        binaryNumber += (num % 2) * pow(10, p);
-        ++p;
+        enqueue(q,num % 2);
         num /= 2;
     }
-    return binaryNumber;
+
+    printList(q->ll.head);
+
+    printf("\n");
+    free(q);
 }
+
+
 
 int main() {
     int n;
     scanf("%d", &n);
 
-    Queue *q = malloc(sizeof(Queue));
-    q->ll.size = 0;
-    q->ll.head = NULL;
-    q->ll.tail = NULL;
+    // Queue *q = malloc(sizeof(Queue));
+    // q->ll.size = 0;
+    // q->ll.head = NULL;
+    // q->ll.tail = NULL;
+    // for(int i = 1; i <= n; i++){
+    //     enqueue(q, tranform(i));
+    // }
+    // printList(q->ll.head);
+
     for(int i = 1; i <= n; i++){
-        enqueue(q, tranform(i));
+        tranform(i);
     }
-    printList(q->ll.head);
-    free(q);
+
 }
