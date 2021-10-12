@@ -149,7 +149,7 @@ int isEmptyQueue(Queue *q)
 
 int main()
 {
-    char str[] = "E A S * Y * Q U E * * * S T * * * I O * N * * *";
+    char str[] = "EAS*Y*QUE***ST***IO*N***";
     Queue *q = malloc(sizeof(Queue));
     q->ll.size = 0;
     q->ll.head = NULL;
@@ -157,12 +157,12 @@ int main()
 
     for (int i = 0; i < strlen(str); i++)
     {
-        if (str[i] == '*')
+        if (str[i] != '*')
         {
-            dequeue(q);
+            enqueue(q, str[i]);
         }
         else
-            enqueue(q, str[i]);
+            printf("%c",dequeue(q));
     }
     printList(q->ll.head);
     free(q);
