@@ -62,17 +62,15 @@ void insertNode(ListNode **pHead, int index, int value)
 }
 
 void removeNode(ListNode **ptrHead, int index)
-{
+{   
     ListNode *cur, *pre;
-    if (index == 0) //the first node will start by 0
-    {
+    if(index == 0) {
         cur = *ptrHead;
         *ptrHead = cur->next;
         free(cur);
     }
-    else
-    {
-        pre = findNode(*ptrHead, index - 1); //take node in front of index of list
+    else {
+        pre = findNode(*ptrHead, index - 1);
         cur = pre->next;
         pre->next = cur->next;
         free(cur);
@@ -84,17 +82,15 @@ int main()
     int n;
     ListNode *newNode, *head = NULL;
     scanf("%d", &n);
-    if (n > 0)
-    {
+    if(n > 0) {
         newNode = malloc(sizeof(ListNode));
         head = newNode;
-        for (int i = 1; i < n; i++)
-        {
+        for (int i = 1; i < n; i++) {
             scanf("%d", &newNode->num);
             newNode->next = malloc(sizeof(ListNode));
             newNode = newNode->next;
         }
-        scanf("%d", &newNode->num); //the last num
+        scanf("%d", &newNode->num);
         newNode->next = NULL;
     }
 
@@ -105,6 +101,4 @@ int main()
 
     removeNode(&head, 1);
     printList(head);
-
-    
 }

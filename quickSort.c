@@ -3,8 +3,8 @@
 
 int Part(int K[], int LB, int UB)
 {
-    int i, m;
-    i = LB;
+    int m;
+    int i = LB;
     int j = UB;
     while (i < j)
     {
