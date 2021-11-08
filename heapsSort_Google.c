@@ -1,82 +1,69 @@
+// Heap Sort in C
+
 #include <stdio.h>
-int size = 0;
-void swap_node(int *a, int *b)
+
+// Function to swap the the position of two elements
+void swap(int *a, int *b)
 {
-  int c = *b;
-  *b = *a;
-  *a = c;
+    int temp = *a;
+    *a = *b;
+    *b = temp;
 }
-void heapify_tree(int arr[], int size, int i)
+
+void heapify(int arr[], int n, int i)
 {
-  if (size == 1)
-  {
-    printf("Có 1 phần tử trong cây!");
-  }
-  else
-  {
-    int biggest = i;
-    int l = 2 * i + 1;
-    int r = 2 * i + 2;
-    if (l < size && arr[l] > arr[biggest])
-      biggest = l;
-    if (r < size && arr[r] > arr[biggest])
-      biggest = r;
-    if (biggest != i)
+    // Find largest among root, left child and right child
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+
+    if (left < n && arr[left] > arr[largest])
+        largest = left;
+
+    if (right < n && arr[right] > arr[largest])
+        largest = right;
+
+    // Swap and continue heapifying if root is not largest
+    if (largest != i)
     {
-      swap_node(&arr[i], &arr[biggest]);
-      heapify_tree(arr, size, biggest);
+        swap(&arr[i], &arr[largest]);
+        heapify(arr, n, largest);
     }
-  }
 }
-void add_node(int arr[], int new_data)
+
+// Main function to do heap sort
+void heapSort(int arr[], int n)
 {
-  if (size == 0)
-  {
-    arr[0] = new_data;
-    size += 1;
-  }
-  else
-  {
-    arr[size] = new_data;
-    size += 1;
-    for (int i = size / 2 - 1; i >= 0; i--)
+    // Build max heap
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapify(arr, n, i);
+
+    // Heap sort
+    for (int i = n - 1; i >= 0; i--)
     {
-      heapify_tree(arr, size, i);
+        swap(&arr[0], &arr[i]);
+
+        // Heapify root element to get highest element at root again
+        heapify(arr, i, 0);
     }
-  }
 }
-void remove_node(int arr[], int data)
+
+// Print an array
+void printArray(int arr[], int n)
 {
-  int i;
-  for (i = 0; i < size; i++)
-  {
-    if (data == arr[i])
-      break;
-  }
-  swap_node(&arr[i], &arr[size - 1]);
-  size -= 1;
-  for (int i = size / 2 - 1; i >= 0; i--)
-  {
-    heapify_tree(arr, size, i);
-  }
+    for (int i = 0; i < n; ++i)
+        printf("%d ", arr[i]);
+    printf("\n");
 }
-void print(int arr[], int size)
-{
-  for (int i = 0; i < size; ++i)
-    printf("%d ", arr[i]);
-  printf("\n");
-}
+
+// Driver code
 int main()
 {
-  int arr[10];
-  add_node(arr, 4);
-  add_node(arr, 6);
-  add_node(arr, 10);
-  add_node(arr, 7);
-  add_node(arr, 3);
-  printf("Max-Heap: ");
-  print(arr, size);
-  remove_node(arr, 4);
-  printf("\n");
-  print(arr, size);
+    int arr[] = {1, 12, 9, 5, 6, 10};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    heapSort(arr, n);
+
+    printf("Sorted array is \n");
+    printArray(arr, n);
 }
