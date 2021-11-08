@@ -1,33 +1,33 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+void swap(int a, int b)
+{
+    int t = a;
+    a = b;
+    b = t;
+}
+
 int Part(int K[], int LB, int UB)
 {
-    int i, m;
-    i = LB;
-    int j = UB;
-    while (i < j)
+    int m = K[LB];
+    int i = LB;
+    int j = UB - 1;
+    while (1)
     {
-        while (K[i] < K[LB])
+        while (i <= j && K[i] < m)
             i++;
-        while (K[j] > K[LB])
+        while (j >= i && K[j] > m)
             j--;
-        if (i < j)
-        {
-            m = K[i];
-            K[i] = K[j];
-            K[j] = m;
-            i++;
-            j--;
-        }
+
+        if (i >= j) break;
+        swap(K[i], K[j]);
+        i++;
+        j--;
+        
     }
-    if (K[LB] > K[j])
-    {
-        m = K[LB];
-        K[LB] = K[j];
-        K[j] = m;
-    }
-    return j;
+    swap(K[i], K[j]);
+    return i;
 }
 
 void QuickSort(int K[], int LB, int UB)
@@ -64,11 +64,11 @@ int main(void)
 
 
     printf("\nMang truoc khi sap xep: ");
-    print_array(K, 11);
+    print_array(K, 12);
 
-    QuickSort(K, 0, 12);
+    QuickSort(K, 0, 11);
 
     printf("\nMang sau khi sap xep: ");
-    print_array(K, 11);
+    print_array(K, 12);
     return 0;
 }
