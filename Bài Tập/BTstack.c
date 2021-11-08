@@ -3,7 +3,7 @@
 
 typedef struct _listnode
 {
-    char num;
+    int num;
     struct _listnode *next;
 } ListNode;
 
@@ -139,16 +139,16 @@ int main()
     s->ll.size = 0;
     s->ll.head = NULL;
 
-    char item;
+    int item;
     do
     {
-        scanf("%c", &item);
+        scanf("%d", &item);
         push(s, item);
-    } while ((s->ll).head->num != '0');
+    } while ((s->ll).head->num != 0);
     pop(s);
 
     while(!isEmptyStack(s)){
-        printf("%c",pop(s));
+        printf("%d ",pop(s));
     }
 
     free(s);
