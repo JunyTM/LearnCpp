@@ -142,7 +142,7 @@ int peek(Stack *s)
 
 int isOperand(char ch)
 {
-    return ((ch >= 'A') && (ch <= 'z'));
+    return ((ch >= 'a') && (ch <= 'z')) || ((ch >= 'A') && (ch <= 'Z'));
 }
 
 int Prec(char ch)
