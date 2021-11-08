@@ -47,10 +47,10 @@ void print_array(int k[], int n)
 }
 int main(void)
 {
-    int K[12]= {9,8,1,3,2,0,7,6,5,4,12,11};
+    int K[12]= {0,8,1,3,2,9,7,6,5,4,12,11};
     printf("\nMang truoc khi sap xep: ");
     print_array(K, 12); 
-    HeapSort(K, 11);
+    HeapSort(K, 12);
     printf("\nMang sau khi sap xep: ");
     print_array(K, 12);
     return 0;

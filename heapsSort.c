@@ -57,7 +57,7 @@ void HeapSort(int K[], int n)
 
 int main()
 {
-	int K[] = {2, 9, 3, 6, 1, 4, 5, 7, 0, 8};
+	int K[] = {0, 9, 3, 6, 1, 4, 5, 7, 2, 8};
 	int n = sizeof(K) / sizeof(int); // Kích thước mảng
 
 	printf("Mang truoc khi sap xep: ");
