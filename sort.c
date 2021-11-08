@@ -43,9 +43,9 @@ void insert_sort1(int k[], int n)
 void bubble_sort1(int k[], int n)
 {
     int i, j, x;
-    for (i = 1; i < n - 1; i++)
+    for (i = 0; i < n - 1; i++)
     {
-        for (j = n - i - 1; j > i; j--)
+        for (j = n - 1; j > 0; j--)
         {
             if (k[j] < k[j - 1])
             {
