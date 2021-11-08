@@ -45,7 +45,7 @@ void bubble_sort1(int k[], int n)
     int i, j, x;
     for (i = 0; i < n - 1; i++)
     {
-        for (j = n - 1; j > 0; j--)
+        for (j = n - 1; j > i; j--)
         {
             if (k[j] < k[j - 1])
             {
