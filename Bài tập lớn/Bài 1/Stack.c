@@ -140,13 +140,18 @@ int main()
     s->ll.head = NULL;
 
     int item;
+    printf("nhap stack (0 - stop):\n");
     do
     {
         scanf("%d", &item);
         push(s, item); //chèn vào ngăn xếp 
     } while ((s->ll).head->num != 0);
     pop(s);
+     
+    int top = peek(s);
+    printf("phan tu dinh stack: %d\n",top);
 
+    printf("stack: ");
     while(!isEmptyStack(s)){
         printf("%d ",pop(s));
     }

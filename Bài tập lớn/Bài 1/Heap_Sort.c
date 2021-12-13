@@ -21,7 +21,6 @@ void ADJUST(int K[], int i, int n) // i vị trí nút gốc, n số lượng n�
     K[j/2] = KEY;
 }
 
-// Bug bỏ qua phần tử vị trí K[0]
 void HeapSort(int K[], int n)
 {
     int i;
@@ -36,8 +35,6 @@ void HeapSort(int K[], int n)
     }
 }
 
-no là pt thứ k[0], 
-
 // In ra mảng trừ phần tử đầu tiên 
 void print_array(int k[], int n)
 {
@@ -49,11 +46,11 @@ void print_array(int k[], int n)
 }
 int main(void)
 {
-    int K[12]= {0,8,1,3,2,9,7,6,5,4,12,11};
+    int K[8]= {0,25,31,23,55,16,41,62};
     printf("\nMang truoc khi sap xep: ");
-    print_array(K, 12); 
-    HeapSort(K, 12);
+    print_array(K, 8); 
+    HeapSort(K, 8);
     printf("\nMang sau khi sap xep: ");
-    print_array(K, 12);
+    print_array(K, 8);
     return 0;
 }

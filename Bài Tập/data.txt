@@ -1,0 +1,8 @@
+6, 0
+dòng 0, cột 0, cột 0, cột 0, cột 0, cột 0, cột 0,
+dòng 0, cột 0
+dòng 0, cột 0
+dòng 0, cột 0
+dòng 0, cột 0
+dòng 0, cột 0
+dòng 0, cột 0

@@ -51,7 +51,7 @@ void HeapSort(int K[], int n)
 		K[1] = K[i + 1];
 		K[i + 1] = tmp;
 
-		ADJUST(K, 1, i);
+		ADJUST(K, 1, i); // tạo đống 
 	}
 }
 
