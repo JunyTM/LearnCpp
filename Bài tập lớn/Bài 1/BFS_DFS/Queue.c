@@ -78,23 +78,6 @@ void removeNode(ListNode **ptrHead, int index){
 } 
 
 // ---------------------------------------- type Queue ---------------------------------------------
-
-// void enqueue(Queue *q, int item){
-//     if (q->ll.tail == NULL)
-//     {
-//         insertNode(&(q->ll.head), 0, item);
-//         (q->ll).tail = (q->ll).head;
-//     }
-//     else
-//     {
-//         (q->ll).tail->next = malloc(sizeof(ListNode));
-//         (q->ll).tail = ((q->ll).tail)->next;
-//         (q->ll).tail->num = item;
-//         (q->ll).tail->next = NULL;
-//         (q->ll).size++;
-//     }
-// }
-
 void enqueue(Queue *q, int item)
 {
     insertNode(&(q->ll.head),q->ll.size,item);

@@ -68,7 +68,7 @@ void bellmanFord(struct Graph *g, int source) {
 int main(void) {
 struct Graph *g = (struct Graph*) malloc( sizeof(struct Graph) );
 int source;
-readData( "/home/khangtm/F1/BTL-CTDL&TT/**Bai_1/11_BellmanFord/data.txt" , g , &source );
+readData( "./data.txt" , g , &source );
 bellmanFord( g , source );
 return 0;
 }

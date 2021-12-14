@@ -3,7 +3,7 @@
 #define MAX 50 // Số đỉnh của đồ thị lớn nhất có thể xét
 
 void readData(char* filename, int G[MAX][MAX], int* pn, int* psource) {
-     FILE* file = fopen (filename, "r");
+     FILE* file = fopen (filename, "r");     // r - reading
      int i, j;
      if (file != NULL) {
           fscanf (file, "%d %d", pn, psource);
@@ -65,7 +65,7 @@ void dijkstra(int G[MAX][MAX], int n, int source){
 
 int main(){
      int G[MAX][MAX], n, source;
-     readData( "/home/khangtm/F1/BTL-CTDL&TT/**Bai_1/10_Dijkstra/data.txt" , G , &n , &source);
+     readData( "./data.txt" , G , &n , &source);
      dijkstra( G , n , source );
      return 0;
 }
