@@ -2,7 +2,6 @@
 #include <stdio.h>
 
 // tạo kiểu dữ liệu mới là BTNode
-
 typedef struct _btnode
 {
     char item;
@@ -37,7 +36,7 @@ void TreeTraversal_PostOrder(BTNode *cur) // duyệt theo thứ tự sau
     printf("%c ", cur->item);
 }
 
-BTNode *BSTT(BTNode *cur, char c)   // tìm nút trên cây tìm kiếm nhị phân 
+BTNode *BSTT(BTNode *cur, char c) // tìm nút trên cây tìm kiếm nhị phân
 {
     if (cur == NULL)
         return NULL;
@@ -49,7 +48,7 @@ BTNode *BSTT(BTNode *cur, char c)   // tìm nút trên cây tìm kiếm nhị ph
         return cur->right;
 }
 
-BTNode *BSTT2(BTNode *cur, char c)  // tìm vị trí nút cha của nút cần chèn vào cây tìm kiếm nhị phân
+BTNode *BSTT2(BTNode *cur, char c) // tìm vị trí nút cha của nút cần chèn vào cây tìm kiếm nhị phân
 {
     if (c == cur->item)
         return NULL;
@@ -72,7 +71,7 @@ int main(void)
     // tạo nút
     BTNode *btnodeA, *btnodeC, *btnodeE, *btnodeF,
         *btnodeG, *btnodeH, *btnodeT;
-    // cấp phát 
+    // cấp phát
     btnodeA = malloc(sizeof(BTNode));
     btnodeC = malloc(sizeof(BTNode));
     btnodeE = malloc(sizeof(BTNode));
@@ -91,7 +90,7 @@ int main(void)
 
     btnodeA->left = NULL;
     btnodeA->right = NULL;
-  
+
     btnodeC->left = btnodeA;
     btnodeC->right = btnodeE;
 
@@ -106,19 +105,19 @@ int main(void)
 
     btnodeH->left = btnodeG;
     btnodeH->right = btnodeT;
-    
+
     btnodeT->left = NULL;
     btnodeT->right = NULL;
 
-    //cây tìm kiếm nhị phân ban đầu 
+    //cây tìm kiếm nhị phân ban đầu
     printf("\nCay tim kiem nhi phan truoc khi chen:\n ");
     TreeTraversal_InOrder(btnodeF);
 
     char D = 'D';
-    // Tìm nút cha của Q 
+    // Tìm nút cha của node D
     BTNode *posNode = BSTT2(btnodeF, D);
 
-    // Tạo nút mới 
+    // Tạo nút mới
     BTNode *btNewNode = malloc(sizeof(BTNode));
     btNewNode->item = D;
     btNewNode->left = NULL;
@@ -127,19 +126,20 @@ int main(void)
     // Chèn vào cây
     if (posNode == NULL)
     {
-        printf("Phan tu da ton tai");
+        printf("\nPhan tu da ton tai");
         return 0;
     }
+    else
+    {
+        printf("\nNut cha cua D: %c", posNode->item);
+    }
+
     if (D < posNode->item)
         posNode->left = btNewNode;
     else
     {
         posNode->right = btNewNode;
-        
     }
     printf("\nCay nhi phan tim kiem sau khi chen:\n ");
     TreeTraversal_InOrder(btnodeF);
-
-
-    
 }

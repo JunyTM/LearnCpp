@@ -94,6 +94,18 @@ int main()
         newNode->next = NULL;
     }
 
+    ListNode *node0, *node1, *node2, *head;
+    node0 = malloc(sizeof(ListNode));
+    node1 = malloc(sizeof(ListNode));
+    node2 = malloc(sizeof(ListNode));
+    node0->num = 10;
+    node1->num = 11;
+    node1->num = 21;
+    node0->next = node1;
+    node1->next = node2;
+    node2->next = NULL;
+    head = node0;
+
     printList(head);
 
     insertNode(&head, 2, 32);

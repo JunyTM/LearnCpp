@@ -153,23 +153,36 @@ int main()
     q->ll.head = NULL;
     q->ll.tail = NULL;
 
-    int item;
-    printf("nhap queue (0 - stop):\n");
-    do
-    {
-        scanf("%d", &item);
-        enqueue(q, item);
-    } while ((q->ll).tail->num != 0);
-    removeNode(&(q->ll.head), q->ll.size);
-    // printList(q->ll.head);
-    
-    int top = peek(q);
-    printf("phan tu dinh queue: %d\n",top);
+    enqueue(q, 10);
+    enqueue(q, 9);
+    enqueue(q, 7);
 
-    int cache;
-    while(!isEmptyQueue(q)) {
-        cache = dequeue(q);
-        printf("%d ",cache);
-    }
+    // int item;
+    // printf("nhap queue (0 - stop):\n");
+    // do
+    // {
+    //     scanf("%d", &item);
+    //     enqueue(q, item);
+    // } while ((q->ll).tail->num != 0);
+    // removeNode(&(q->ll.head), q->ll.size);
+    printf("queue:\n");
+    printList(q->ll.head);
+    
+    printf("\nenqueue: value-8\n");
+    enqueue(q, 8);
+    printList(q->ll.head);
+
+    int top = peek(q);
+    printf("\nvalue top:\n%d",top);
+
+    printf("\ndequeue: value-10\n");
+    dequeue(q);
+    printList(q->ll.head);
+
+    // int cache;
+    // while(!isEmptyQueue(q)) {
+    //     cache = dequeue(q);
+    //     printf("%d ",cache);
+    // }
     free(q);
 }

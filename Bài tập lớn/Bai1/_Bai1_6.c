@@ -18,11 +18,10 @@ void selection_sort1(int k[], int n)
         {
             x = k[i];
             k[i] = k[m];
-            k[m] = x;                                           
+            k[m] = x;
         }
     }
 }
-
 
 void insert_sort1(int k[], int n)
 {
@@ -40,7 +39,6 @@ void insert_sort1(int k[], int n)
     }
 }
 
-
 void bubble_sort1(int k[], int n)
 {
     int i, j, x;
@@ -56,7 +54,7 @@ void bubble_sort1(int k[], int n)
             }
         }
     }
-} 
+}
 // -------------------------------------- decrease -----------------------------------------
 
 void insert_sort2(int k[], int n)
@@ -91,11 +89,10 @@ void selection_sort2(int k[], int n)
         {
             x = k[i];
             k[i] = k[m];
-            k[m] = x;                                           
+            k[m] = x;
         }
     }
 }
-
 
 void bubble_sort2(int k[], int n)
 {
@@ -114,16 +111,19 @@ void bubble_sort2(int k[], int n)
     }
 }
 
-void printOut(int k[], int n){
+void printOut(int k[], int n)
+{
     int i;
-    for(i = 0; i<n; i++) {
+    for (i = 0; i < n; i++)
+    {
         printf("%d ", k[i]);
     }
 }
 
 // --------------------------------------- main ------------------------------------
 
-int main() {
+int main()
+{
     int n = 7;
     int a[] = {9, 11, 8, 6, 7, 5, 10};
     printOut(a, n);
@@ -132,23 +132,22 @@ int main() {
     printOut(a, n);
 
     insert_sort1(a, n);
-    printf("\nbubble sort increase\n");
+    printf("\nbubble sort increase:\n");
     printOut(a, n);
-    
+
     bubble_sort1(a, n);
-    printf("\ninsert sort increase\n");
+    printf("\ninsert sort increase:\n");
     printOut(a, n);
-    
 
     selection_sort2(a, n);
     printf("\n\nselection sort decrease:\n");
     printOut(a, n);
-    
+
     insert_sort2(a, n);
-    printf("\ninsert sort decrease\n");
+    printf("\ninsert sort decrease:\n");
     printOut(a, n);
-    
-    bubble_sort2(a, n);    
-    printf("\nbubble sort decrease\n");
+
+    bubble_sort2(a, n);
+    printf("\nbubble sort decrease:\n");
     printOut(a, n);
 }

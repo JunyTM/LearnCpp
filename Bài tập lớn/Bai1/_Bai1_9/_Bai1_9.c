@@ -111,7 +111,9 @@ int main()
 {
     int i;
     setbuf(stdout, NULL);
-    readData("./data.txt", G, &n, &source);
+    readData("./_Bai1_9.txt", G, &n, &source);
+    printf("node: 0 - a, 1 - e, 2 - g, 3 - h, 4 - t\n");
+
     printf("\nBFS: ");
     breadthFirstSearch(G, n, source);
 

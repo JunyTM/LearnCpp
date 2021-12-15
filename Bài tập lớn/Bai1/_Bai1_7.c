@@ -61,7 +61,6 @@ int main(void)
     */
 
     int K[8] = {9, 16, 4, 21, 3, 11, 6, 7};
-    
 
     printf("\nMang truoc khi sap xep: ");
     print_array(K, 8);

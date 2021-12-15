@@ -147,6 +147,8 @@ int main()
     } while ((s->ll).head->num != 0);
     pop(s);
 
+    printList(s->ll.head);
+
     while(!isEmptyStack(s)){
         printf("%d ",pop(s));
     }

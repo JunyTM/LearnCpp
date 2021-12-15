@@ -79,43 +79,42 @@ void removeNode(ListNode **ptrHead, int index)
 
 int main()
 {
-    int n;
-    ListNode *newNode, *head = NULL;
+    // printf("Nhap so phan tu: ");
+    // scanf("%d", &n);
+    // if(n > 0) {
+    //     newNode = malloc(sizeof(ListNode));
+    //     head = newNode;
+    //     for (int i = 1; i < n; i++) {
+    //         scanf("%d", &newNode->num);
+    //         newNode->next = malloc(sizeof(ListNode));
+    //         newNode = newNode->next;
+    //     }
+    //     scanf("%d", &newNode->num);
+    //     newNode->next = NULL;
+    // }
 
-    printf("Nhap so phan tu: ");
-    scanf("%d", &n);
-    if(n > 0) {
-        newNode = malloc(sizeof(ListNode));
-        head = newNode;
-        for (int i = 1; i < n; i++) {
-            scanf("%d", &newNode->num);
-            newNode->next = malloc(sizeof(ListNode));
-            newNode = newNode->next;
-        }
-        scanf("%d", &newNode->num);
-        newNode->next = NULL;
-    }
+    ListNode *node0, *node1, *node2, *head;
+    node0 = malloc(sizeof(ListNode));
+    node1 = malloc(sizeof(ListNode));
+    node2 = malloc(sizeof(ListNode));
+    node0->num = 10;
+    node1->num = 11;
+    node2->num = 21;
+    node0->next = node1;
+    node1->next = node2;
+    node2->next = NULL;
+    head = node0;
 
-    printf("danh sach: ");
+
+    printf("list: \n");
     printList(head);
 
-    ListNode *node_;
-    int index;
-    printf("\nnhap phan tu can tim (index): ");
-    scanf("%d", &index);
-    node_ = findNode(head, index);
-    printf("\nnode can tim: %d", node_->num);
-
-    int value;
-    printf("\nnhap phan tu can chen (index-value): ");
-    scanf("%d%d", &index,&value);
-    insertNode(&head, index, value);
-
+    printf("\ninsert node: index = 0, value = 13\n");
+    insertNode(&head, 0, 13);
     printList(head);
 
-    printf("\nxoa phan tu tai vi tri:");
-    scanf("%d", &index);
-    removeNode(&head, index);
-
+    printf("\nremove node: index = 0\n");
+    removeNode(&head, 0);
     printList(head);
+
 }
